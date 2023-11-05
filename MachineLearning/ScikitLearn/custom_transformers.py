@@ -2,10 +2,18 @@ from sklearn.base import BaseEstimator, TransformerMixin
 import pandas as pd
 
 
+# Transformador sem herança - Possível de integrar ao Pipeline. Sem flexibilidade.
+class Square:
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        return X ** 2
+
+
 # Usando Scikit Learn - Possível de integrar ao Pipeline. Boa prática e melhor deploy.
 class CombineAttributes(BaseEstimator, TransformerMixin):
     def __init__(self, to_integer=True):
-        self.columns_ = None
         self.column = "Dorm"
         self.column_name = "Notebook per Dorm"
         self.to_integer = to_integer
